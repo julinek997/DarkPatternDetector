@@ -44,7 +44,7 @@ function applyHighlightStyles() {
         /* Customize the styles to visually highlight dark patterns */
         .highlight {
             background-color: #FFD6D6 !important; /* Light red background for highlighted words */
-            padding: 2px; /* Adjust padding as needed */
+            /* No padding adjustment to keep the original padding */
         }
     `;
 
@@ -52,9 +52,27 @@ function applyHighlightStyles() {
     document.head.appendChild(style);
 
     // Apply styles directly to elements containing manipulative phrases
-    document.body.innerHTML = document.body.innerHTML.replace(
-        new RegExp(`\\b(${manipulativePhrases.join('|')})\\b`, 'gi'),
-        '<span class="highlight">$1</span>'
-    );
+    manipulativePhrases.forEach(phrase => {
+        const regex = new RegExp(`\\b(${phrase})\\b`, 'gi');
+
+        // Find all text nodes and apply highlighting to the matched phrases
+        walk(document.body);
+
+        function walk(node) {
+            if (node.nodeType == 3) { // Node.TEXT_NODE
+                // Text node, apply highlighting to the content
+                const parent = node.parentNode;
+                const html = node.nodeValue.replace(regex, (match) => `<span class="highlight">${match}</span>`);
+                const wrapper = document.createElement('span');
+                wrapper.innerHTML = html;
+                parent.replaceChild(wrapper, node);
+            } else if (node.nodeType == 1) { // Node.ELEMENT_NODE
+                // Element node, recursively process child nodes
+                for (let i = 0; i < node.childNodes.length; i++) {
+                    walk(node.childNodes[i]);
+                }
+            }
+        }
+    });
 }
 
