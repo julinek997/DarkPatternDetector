@@ -9,13 +9,16 @@
 </head>
 <body>
     <div id="content">
-        <h1>Dark Patterns Detector</h1>
-        <label for="highlightColor">Highlight Color:</label>
-        <input type="color" id="highlightColor" value="#FFD6D6">
-        <br>
-        <label for="highContrast">High Contrast:</label>
-        <input type="checkbox" id="highContrast">
-        <br>
+        <p class="description">
+            Detect deceptive practices on websites that may manipulate users. Click the "Detect Dark Patterns" button to analyze the current webpage.
+        </p>
+        <div id="options">
+            <label for="highlightColor">Highlight Color:</label>
+            <input type="color" id="highlightColor" value="#FFD6D6" title="Choose the highlight color">
+            <br>
+            <input type="checkbox" id="highContrast" title="Enable High Contrast">
+            <label for="highContrast">High Contrast</label>
+        </div>
         <button id="detectButton">Detect Dark Patterns</button>
         <div id="result"></div>
     </div>

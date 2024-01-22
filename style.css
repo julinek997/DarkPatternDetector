@@ -1,8 +1,74 @@
 /* style.css */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f8f8;
+    color: #333;
 }
 
-.highlight {
-    background-color: #FFD6D6 !important; /* Light red background for highlighted words */
+#content {
+    max-width: 400px;
+    margin: auto;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+h1 {
+    font-size: 2em; /* Adjusted font size */
+    margin: 0;
+}
+
+.description {
+    font-size: 1.1em; /* Adjusted font size */
+    margin-bottom: 20px;
+}
+
+#options {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1em; /* Adjusted font size */
+}
+
+input[type="color"] {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px 18px; /* Adjusted padding */
+    font-size: 1.2em; /* Adjusted font size */
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 1.1em; /* Adjusted font size */
+    font-weight: bold;
 }
