@@ -68,4 +68,11 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             applyHighlightStyles(request.highlightColor, request.highContrast);
         }
     }
+    
+    if (request.action === 'submitFeedback') {
+        const feedbackText = request.feedbackText;
+
+        // You can now send the feedbackText to the administrator's email or perform other actions as needed.
+        console.log('Feedback submitted:', feedbackText);
+    }
 });
