@@ -71,8 +71,33 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     
     if (request.action === 'submitFeedback') {
         const feedbackText = request.feedbackText;
-
-        // You can now send the feedbackText to the administrator's email or perform other actions as needed.
-        console.log('Feedback submitted:', feedbackText);
-    }
-});
+    
+        // Send feedback to the server
+        fetch('http://localhost:3000/submit-feedback', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ feedbackText }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Server response:', data);
+    
+            // Optionally, you can handle the server response here
+            if (data.status === 'Feedback submitted successfully!') {
+              // Perform actions on successful feedback submission
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            // Handle the error as needed
+          });
+      }
+    
+      // Handle other types of messages here if needed
+    
+      // Always call sendResponse to indicate that the message has been processed
+      sendResponse({ status: 'Message received in content script!' });
+   
+    });
