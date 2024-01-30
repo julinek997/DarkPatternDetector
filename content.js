@@ -1,20 +1,16 @@
-// content.js
-
-// Define the detectDarkPatterns function
 function detectDarkPatterns(content) {
+
     // Convert the content to lowercase for case-insensitive matching
     const lowerCaseContent = content.toLowerCase();
 
-    // Define a list of manipulative phrases to look for
     const manipulativePhrases = ['trick', 'deceive', 'mislead', 'manipulate', 'black friday', 'in demand', 'selling fast'];
 
-    // Check if any manipulative phrases are present in the content
+    // Check if any manipulative phrases are present
     const hasManipulativePhrases = manipulativePhrases.some(phrase => lowerCaseContent.includes(phrase));
 
     return hasManipulativePhrases;
 }
 
-// Define the applyHighlightStyles function
 function applyHighlightStyles(highlightColor, highContrast) {
     const style = document.createElement('style');
     style.textContent = `
@@ -49,7 +45,6 @@ function applyHighlightStyles(highlightColor, highContrast) {
     });
 }
 
-// Add the message listener after defining the functions
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.action === 'detectDarkPatterns') {
         const content = document.body.innerText;
@@ -84,20 +79,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
           .then(data => {
             console.log('Server response:', data);
     
-            // Optionally, you can handle the server response here
-            if (data.status === 'Feedback submitted successfully!') {
-              // Perform actions on successful feedback submission
-            }
           })
-          .catch(error => {
-            console.error('Error:', error);
-            // Handle the error as needed
-          });
       }
     
-      // Handle other types of messages here if needed
-    
-      // Always call sendResponse to indicate that the message has been processed
       sendResponse({ status: 'Message received in content script!' });
    
     });

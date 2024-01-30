@@ -1,5 +1,3 @@
-// popup.js
-
 document.getElementById('detectButton').addEventListener('click', detectDarkPatterns);
 
 function detectDarkPatterns() {
@@ -25,7 +23,6 @@ function submitFeedback() {
         var activeTab = tabs[0];
         chrome.tabs.sendMessage(activeTab.id, { action: 'submitFeedback', feedbackText });
     });
-
-    // Optionally, you can clear the feedback form after submission
+    
     document.getElementById('feedbackText').value = '';
 }

@@ -7,10 +7,9 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors()); // Enable CORS
+app.use(cors());
 app.use(bodyParser.json());
 
-// Configure nodemailer with your email service credentials
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
