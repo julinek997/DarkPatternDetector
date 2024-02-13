@@ -1,5 +1,4 @@
 function detectDarkPatterns(content) {
-
     // Convert the content to lowercase for case-insensitive matching
     const lowerCaseContent = content.toLowerCase();
 
@@ -43,6 +42,41 @@ function applyHighlightStyles(highlightColor, highContrast) {
             }
         }
     });
+    
+    const cookieButtons = document.querySelectorAll('button');
+
+    cookieButtons.forEach(button => {
+        const buttonText = button.textContent.toLowerCase();
+        if (buttonText.includes('accept') || buttonText.includes('allow') || buttonText.includes('agree')) {
+            button.classList.add('accept-cookies'); 
+            highlightButton(button);
+        } else if (buttonText.includes('decline') || buttonText.includes('reject') || buttonText.includes('deny')) {
+            button.classList.add('decline-cookies'); 
+            highlightButton(button);
+        }
+    });
+
+    function highlightButton(button) {
+        button.style.backgroundColor = highlightColor; 
+        if (highContrast) {
+            button.style.color = 'white'; 
+        }
+    }
+
+    for (let i = 0; i < cookieButtons.length - 1; i++) { 
+        const button1 = cookieButtons[i];
+        const button2 = cookieButtons[i + 1];
+
+        const rect1 = button1.getBoundingClientRect(); 
+        const rect2 = button2.getBoundingClientRect();
+
+        const distance = Math.abs(rect1.right - rect2.left); 
+
+        if (distance < 5) { 
+            button1.classList.add('highlight'); 
+            button2.classList.add('highlight'); 
+        }
+    }
 }
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -83,5 +117,4 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       }
     
       sendResponse({ status: 'Message received in content script!' });
-   
-    });
+});
