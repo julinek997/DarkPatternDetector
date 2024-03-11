@@ -1,11 +1,19 @@
-function detectDarkPatterns(content) {
+function detectDarkPatterns(content, selectedCategories) {
     // Convert the content to lowercase for case-insensitive matching
     const lowerCaseContent = content.toLowerCase();
 
-    const manipulativePhrases = ['trick', 'deceive', 'mislead', 'manipulate', 'black friday', 'in demand', 'selling fast'];
 
-    // Check if any manipulative phrases are present
-    const hasManipulativePhrases = manipulativePhrases.some(phrase => lowerCaseContent.includes(phrase));
+    const manipulativePhrases = {
+        fakeScarcity: ['limited offer', 'only left in stock', 'low stock', 'limited time'],
+    };
+
+    let allPhrases = [];
+
+    selectedCategories.forEach(category => {
+        allPhrases = allPhrases.concat(manipulativePhrases[category]);
+    });
+
+    const hasManipulativePhrases = allPhrases.some(phrase => lowerCaseContent.includes(phrase));
 
     return hasManipulativePhrases;
 }
@@ -21,26 +29,31 @@ function applyHighlightStyles(highlightColor, highContrast) {
 
     document.head.appendChild(style);
 
-    const manipulativePhrases = ['trick', 'deceive', 'mislead', 'manipulate', 'black friday', 'in demand', 'selling fast'];
+    const manipulativePhrases = {
+        fakeScarcity: ['limited offer', 'only left in stock', 'low stock'],
+    };
 
-    manipulativePhrases.forEach(phrase => {
-        const regex = new RegExp(`\\b(${phrase})\\b`, 'gi');
+    Object.keys(manipulativePhrases).forEach(category => {
+        const phrases = manipulativePhrases[category];
+        phrases.forEach(phrase => {
+            const regex = new RegExp(`\\b(${phrase})\\b`, 'gi');
 
-        walk(document.body);
+            walk(document.body);
 
-        function walk(node) {
-            if (node.nodeType == 3) {
-                const parent = node.parentNode;
-                const html = node.nodeValue.replace(regex, (match) => `<span class="highlight">${match}</span>`);
-                const wrapper = document.createElement('span');
-                wrapper.innerHTML = html;
-                parent.replaceChild(wrapper, node);
-            } else if (node.nodeType == 1) {
-                for (let i = 0; i < node.childNodes.length; i++) {
-                    walk(node.childNodes[i]);
+            function walk(node) {
+                if (node.nodeType == 3) {
+                    const parent = node.parentNode;
+                    const html = node.nodeValue.replace(regex, (match) => `<span class="highlight">${match}</span>`);
+                    const wrapper = document.createElement('span');
+                    wrapper.innerHTML = html;
+                    parent.replaceChild(wrapper, node);
+                } else if (node.nodeType == 1) {
+                    for (let i = 0; i < node.childNodes.length; i++) {
+                        walk(node.childNodes[i]);
+                    }
                 }
             }
-        }
+        });
     });
     
     const cookieButtons = document.querySelectorAll('button');
@@ -82,7 +95,7 @@ function applyHighlightStyles(highlightColor, highContrast) {
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.action === 'detectDarkPatterns') {
         const content = document.body.innerText;
-        const hasDarkPatterns = detectDarkPatterns(content);
+        const hasDarkPatterns = detectDarkPatterns(content, request.selectedCategories);
 
         chrome.runtime.sendMessage({
             action: 'showResult',
