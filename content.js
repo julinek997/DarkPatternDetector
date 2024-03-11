@@ -4,8 +4,9 @@ function detectDarkPatterns(content, selectedCategories) {
 
 
     const manipulativePhrases = {
-        fakeScarcity: ['limited offer', 'only left in stock', 'low stock', 'limited', 'black friday', 'only left'],
+        fakeScarcity: ['only left in stock', 'low stock', 'limited', 'black friday', 'only left'],
         fakeSocialProof: ['bestseller', 'top rated', 'highly recommended', 'trusted by', 'trending'],
+        fakeUrgency: ['last chance', 'limited time', 'hurry', 'ending soon', 'today only'],
     };
 
     let allPhrases = [];
@@ -33,6 +34,7 @@ function applyHighlightStyles(highlightColor, highContrast) {
     const manipulativePhrases = {
         fakeScarcity: ['limited offer', 'only left in stock', 'low stock', 'limited', 'black friday', 'only left'],
         fakeSocialProof: ['bestseller', 'top rated', 'highly recommended', 'trusted by', 'trending'],
+        fakeUrgency: ['last chance', 'limited time', 'hurry', 'ending soon', 'today only'],
     };
 
 

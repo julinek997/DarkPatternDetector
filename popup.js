@@ -6,10 +6,12 @@ function detectDarkPatterns() {
 
     const fakeScarcityChecked = document.getElementById('fakeScarcityCheckbox').checked;
     const fakeSocialProofChecked = document.getElementById('fakeSocialProofCheckbox').checked;
+    const fakeUrgencyChecked = document.getElementById('fakeUrgencyCheckbox').checked;
 
     const selectedCategories = [];
     if (fakeScarcityChecked) selectedCategories.push('fakeScarcity');
     if (fakeSocialProofChecked) selectedCategories.push('fakeSocialProof');
+    if (fakeUrgencyChecked) selectedCategories.push('fakeUrgency');
 
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         var activeTab = tabs[0];
