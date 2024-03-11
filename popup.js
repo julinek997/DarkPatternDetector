@@ -5,9 +5,11 @@ function detectDarkPatterns() {
     const highContrast = document.getElementById('highContrast').checked;
 
     const fakeScarcityChecked = document.getElementById('fakeScarcityCheckbox').checked;
+    const fakeSocialProofChecked = document.getElementById('fakeSocialProofCheckbox').checked;
 
     const selectedCategories = [];
     if (fakeScarcityChecked) selectedCategories.push('fakeScarcity');
+    if (fakeSocialProofChecked) selectedCategories.push('fakeSocialProof');
 
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         var activeTab = tabs[0];

@@ -4,7 +4,8 @@ function detectDarkPatterns(content, selectedCategories) {
 
 
     const manipulativePhrases = {
-        fakeScarcity: ['limited offer', 'only left in stock', 'low stock', 'limited time'],
+        fakeScarcity: ['limited offer', 'only left in stock', 'low stock', 'limited', 'black friday', 'only left'],
+        fakeSocialProof: ['bestseller', 'top rated', 'highly recommended', 'trusted by', 'trending'],
     };
 
     let allPhrases = [];
@@ -30,8 +31,10 @@ function applyHighlightStyles(highlightColor, highContrast) {
     document.head.appendChild(style);
 
     const manipulativePhrases = {
-        fakeScarcity: ['limited offer', 'only left in stock', 'low stock'],
+        fakeScarcity: ['limited offer', 'only left in stock', 'low stock', 'limited', 'black friday', 'only left'],
+        fakeSocialProof: ['bestseller', 'top rated', 'highly recommended', 'trusted by', 'trending'],
     };
+
 
     Object.keys(manipulativePhrases).forEach(category => {
         const phrases = manipulativePhrases[category];
