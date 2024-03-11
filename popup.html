@@ -20,12 +20,20 @@
             <br>
             <fieldset>
                 <legend>Dark Pattern Categories:</legend>
-                <input type="checkbox" id="fakeScarcityCheckbox" checked>
-                <label for="fakeScarcityCheckbox">Fake Scarcity</label><br>
-                <input type="checkbox" id="fakeSocialProofCheckbox" checked>
-                <label for="fakeScarcityCheckbox">Fake Social Proof</label><br>
-                <input type="checkbox" id="fakeUrgencyCheckbox" checked>
-                <label for="fakeUrgencyCheckbox">Fake Urgency</label><br>
+                <label for="fakeScarcityCheckbox" title="The user is pressured into completing an action because they are presented with a fake indication 
+                of limited supply or popularity.">
+                    <input type="checkbox" id="fakeScarcityCheckbox" checked>
+                    Fake Scarcity
+                </label><br>
+                <label for="fakeSocialProofCheckbox" title="FThe user is misled into believing a product is more popular or credible than it really is, 
+                because they were shown fake reviews, testimonials, or activity messages.">
+                    <input type="checkbox" id="fakeSocialProofCheckbox" checked>
+                    Fake Social Proof
+                </label><br>
+                <label for="fakeUrgencyCheckbox" title="The user is pressured into completing an action because they are presented with a fake time limitation.">
+                    <input type="checkbox" id="fakeUrgencyCheckbox" checked>
+                    Fake Urgency
+                </label><br>
             </fieldset>
         </div>
         <button id="detectButton">Detect Dark Patterns</button>
