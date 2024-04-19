@@ -7,7 +7,8 @@
         "activeTab",
         "storage",
         "tabs",
-        "webRequest"
+        "webRequest",
+        "notifications"
     ],
     "action": {
         "default_icon": "icon.png",

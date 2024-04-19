@@ -5,7 +5,7 @@ function detectDarkPatterns(content, selectedCategories) {
 
     const manipulativePhrases = {
         fakeScarcity: ['only left in stock', 'low stock', 'limited', 'black friday', 'only left'],
-        fakeSocialProof: ['bestseller', 'top rated', 'highly recommended', 'trusted by', 'trending'],
+        fakeSocialProof: ['bestseller', 'top rated', 'highly recommended', 'trusted by', 'trending', 'just bought', 'best seller'],
         fakeUrgency: ['last chance', 'limited time', 'hurry', 'ending soon', 'today only'],
     };
 
@@ -17,7 +17,19 @@ function detectDarkPatterns(content, selectedCategories) {
 
     const hasManipulativePhrases = allPhrases.some(phrase => lowerCaseContent.includes(phrase));
 
+    if (hasManipulativePhrases) {
+        playNotificationSound();
+    }
+
     return hasManipulativePhrases;
+}
+
+function playNotificationSound() {
+    console.log("Playing notification sound");
+    const audio = new Audio(chrome.runtime.getURL('352651__foolboymedia__piano-notification-3.wav'));
+    audio.play()
+        .then(() => console.log('Audio played successfully'))
+        .catch(error => console.error('Error playing audio:', error));
 }
 
 function applyHighlightStyles(highlightColor, highContrast) {
@@ -33,7 +45,7 @@ function applyHighlightStyles(highlightColor, highContrast) {
 
     const manipulativePhrases = {
         fakeScarcity: ['limited offer', 'only left in stock', 'low stock', 'limited', 'black friday', 'only left'],
-        fakeSocialProof: ['bestseller', 'top rated', 'highly recommended', 'trusted by', 'trending'],
+        fakeSocialProof: ['bestseller', 'top rated', 'highly recommended', 'trusted by', 'trending', 'just bought', 'best seller'],
         fakeUrgency: ['last chance', 'limited time', 'hurry', 'ending soon', 'today only'],
     };
 
